@@ -1,4 +1,7 @@
+const http = require('http')
 
-const fileCreate = require('fs').writeFileSync;
-fileCreate("hello2.html", "html files 2 are Created with NODE")
-
+http.createServer((req, resp)=>{
+    resp.writeHead(200, {'content-type' : 'application/json'});
+    resp.write(JSON.stringify('Web Developer ROHIT, NODE User'));
+    resp.end();
+}).listen(4500);
