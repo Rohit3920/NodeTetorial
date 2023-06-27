@@ -1,8 +1,18 @@
-const http = require('http');
-const data = require('./data')
+const fs = require('fs')
+const input = process.argv;
 
-http.createServer((req, resp)=>{
-    resp.writeHead(200, {'content-type': 'application/json'});
-    resp.write(JSON.stringify(data.name));
-    resp.end();
-}).listen(5000);
+if (input[2] == 'add'){
+    fs.writeFileSync(input[3], input[4])    //Create file using Input from command line
+}else if(input[2] == 'remove'){
+    fs.unlinkSync(input[3])         //Delete file using Input from command line
+}else{
+    console.log('Invalid Input')
+}
+
+
+
+
+// const fs = require('fs')
+// const input = process.argv;
+
+// fs.writeFileSync('simple.txt', `my name is :- ${input[2]}`)
