@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Rohit3920/NodeTetorial#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "express": "^4.18.2"
   }
 }
