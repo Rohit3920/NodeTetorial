@@ -1,60 +1,15 @@
-// CRUD operation with fs(file system)
-// Make file 
-// Create file
-// Read file
-// Update file
-// Rename file
-// Delete file
+const express = require('express');
+const App = express();
 
-const fs = require('fs');
-const path = require('path');
+App.get('', (req, resp) => {
+    resp.send("<h1>Hello! this is Home page</h1>")
+});
 
-const input = process.argv;
+App.get('/about', (req, resp) => {
+    resp.send("<h4>Hello! this is About page</h4>")
+});
 
-const dirPath = path.join(__dirname, 'files');
+App.listen(4622);
 
-
-if (input[2] == 'add') {
-
-    // Create file
-    fs.writeFileSync(`${dirPath}/Hello.txt`, 'Hello! I`m Web Developer ROHIT, NODE user');
-
-} else if (input[2] == 'read') {
-
-    // Read file
-    fs.readFile(`${dirPath}/Hello.txt`, 'utf-8', (err, files) => (console.log(files)));
-
-} else if (input[2] == 'update') {
-
-    // Update file
-    fs.appendFile(`${dirPath}/Hello.txt`, ' & I am learner for Web Developer', (e) => { if (!e) console.log('update successfully') });
-
-} else if (input[2] == 'rename') {
-
-    // Rename file name
-    fs.rename(`${dirPath}/Hello.txt`, `${dirPath}/HelloUser.txt`, (e) => { if (!e) console.log('rename successfully') })
-
-} else if (input[2] == 'delete') {
-
-    // Delete file
-    fs.unlinkSync(`${dirPath}/HelloUser.txt`, (e) => { if (!e) console.log('delete successfully') })
-
-} else {
-    console.log('\x1b[31m','Invalid Command. please helps this manu');
-    console.log('\x1b[33m%s\x1b[0m','MANU -- node index.js add // read // update // rename // delete ')
-}
-
-
-
-//commands for CRUD operations 
-
-// PS C:\Users\HP\Desktop\Node_teto> node index.js add
-// PS C:\Users\HP\Desktop\Node_teto> node index.js read 
-// Hello! I`m Web Developer ROHIT, NODE user
-// PS C:\Users\HP\Desktop\Node_teto> node index.js update
-// update successfully
-// PS C:\Users\HP\Desktop\Node_teto> node index.js rename
-// rename successfully
-// PS C:\Users\HP\Desktop\Node_teto> node index.js delete
-
-
+// this is a library for Node Js
+// using Express Js, save the time for coding
