@@ -40,7 +40,8 @@ if (input[2] == 'add') {
     fs.unlinkSync(`${dirPath}/HelloUser.txt`, (e) => { if (!e) console.log('delete successfully') })
 
 } else {
-    console.log('Invalid Input');
+    console.log('\x1b[31m','Invalid Command. please helps this manu');
+    console.log('\x1b[33m%s\x1b[0m','MANU -- node index.js add // read // update // rename // delete ')
 }
 
 
