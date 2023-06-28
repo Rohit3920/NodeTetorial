@@ -8,5 +8,7 @@ App.get("", (req, resp) => {
 
 App.listen(4622);
 
-// this is a library for Node Js
-// using Express Js, save the time for coding
+
+
+//cmd : node index.js
+//URL change : localhost:4622/?name=rohit
