@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Profile Page</title>
 
     <style>
-        table, td{
+        table,
+        td {
             border: 1px solid black;
             padding: 4px;
         }
     </style>
 </head>
-<body>
-    <h1>Welcome Mr. <%= user.name %></h1>
-    <h3>Email ID:  <%= user.email %></h3>
-    <p>Working from <%= user.prof %></p>
 
-    <!-- <table>
+<body>
+    <%- include('common/header') %>                             //implement common file to load html file
+
+        <h1>Welcome Mr. <%= user.name %>
+        </h1>
+        <h3>Email ID: <%= user.email %>
+        </h3>
+        <p>Working from <%= user.prof %>
+        </p>
+
+        <h3>My Skills :-</h3>
+        <ul>                                                            //using forEach loop add skills And <% %> this is ejs barckets
+            <% user.skills.forEach((item)=>{ %>
+                <li>
+                    <%= item %>
+                </li>
+                <% }) %>
+        </ul>
+
+        <!-- <table>
         <tbody>
             <tr>
                 <td><%= user.name %></td>
@@ -25,4 +42,5 @@
         </tbody>
     </table> -->
 </body>
+
 </html>

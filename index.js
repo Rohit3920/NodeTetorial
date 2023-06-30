@@ -11,9 +11,14 @@ App.get('/profile', (_, resp)=>{                         //then use dynamically
     const user= {
         name: 'Rohit Nittawadekar',
         email: "rohitnittawadekar07@gmail.com",
-        prof: "Web Developer- NODE user"
+        prof: "Web Developer- NODE user",
+        skills: ['HTML', 'CSS', 'JS', 'Bootstrap', 'jQuery', 'React Js', 'Node Js']     // add skills as a Object to send data in profile.ejs
     }
 resp.render('profile', {user})
+})
+
+App.get('/login', (_, resp)=>{                      // add Login.ejs file
+    resp.render('login')
 })
 
 App.get('', (_, resp)=>{
@@ -44,3 +49,7 @@ App.listen(4622);
 // Install ejs package cmd == npm i ejs 
 // set in App 
 // then use 
+
+// <% %> this is ejs barckets
+// <%= %> is a Js load
+// <% %> is a html load
