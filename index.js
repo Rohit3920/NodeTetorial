@@ -1,19 +1,16 @@
 const express = require('express')
 const reqFilter = require('./Middleware')
+const route = express.Router();
 
 const app = express();
 
-
-
-// app.use(reqFilter)
-
-// Apple Middleware On single Route  ---> user, contact, login pages applied single route
+route.use(reqFilter)
 
 app.get('/', (req, resp) => {
     resp.send("<h1>Hello! this is a HOME page</h1>")
 })
 
-app.get('/user',reqFilter, (req, resp) => {
+route.get('/user', (req, resp) => {
     resp.send("<h1>Hello! this is a USER page</h1>")
 })
 
@@ -21,12 +18,14 @@ app.get('/about', (req, resp) => {
     resp.send("<h1>Hello! this is a ABOUT page</h1>")
 })
 
-app.get('/contact', reqFilter, (req, resp) => {
+route.get('/contact', (req, resp) => {
     resp.send("<h1>Hello! this is a CONTACT page</h1>")
 })
 
-app.get('/login',reqFilter, (req, resp) => {
+route.get('/login', (req, resp) => {
     resp.send("<h1>Hello! this is a LOGIN page</h1>")
 })
+
+app.use('/', route)
 
 app.listen(5000);
