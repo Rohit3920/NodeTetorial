@@ -1,55 +1,25 @@
-const express = require('express');
-const path = require('path')
+const express = require('express')
 
-const App = express();
+const app = express();
 
-const pubPath = path.join(__dirname, 'Public')
+const reqFilter = (req, resp, next)=>{
+  if(!req.query.age){
+    resp.send("Please valid age")
+  }else if(req.query.age < 18){
+    resp.send("You can not access the page")
+  }else{
+    next();
+  }
+}
 
-App.set('view engine', 'ejs')                           // ejs set in app
+app.use(reqFilter)
 
-App.get('/profile', (_, resp)=>{                         //then use dynamically
-    const user= {
-        name: 'Rohit Nittawadekar',
-        email: "rohitnittawadekar07@gmail.com",
-        prof: "Web Developer- NODE user",
-        skills: ['HTML', 'CSS', 'JS', 'Bootstrap', 'jQuery', 'React Js', 'Node Js']     // add skills as a Object to send data in profile.ejs
-    }
-resp.render('profile', {user})
+app.get('/', (req, resp)=>{
+resp.send("<h1>Hello! this is a HOME page</h1>")
 })
 
-App.get('/login', (_, resp)=>{                      // add Login.ejs file
-    resp.render('login')
-})
+app.get('/user', (req, resp)=>{
+    resp.send("<h1>Hello! this is a USER page</h1>")
+    })
 
-App.get('', (_, resp)=>{
-    resp.sendFile(`${pubPath}/index.html`)
-})
-
-App.get('/about', (_, resp)=>{
-    resp.sendFile(`${pubPath}/about.html`)
-})
-
-App.get('/help', (_, resp)=>{
-    resp.sendFile(`${pubPath}/help.html`)
-})
-
-App.get('*', (_, resp)=>{
-    resp.sendFile(`${pubPath}/p404.html`)
-})
-
-
-App.listen(4622);
-
-// Install ejs (engine) templete package ---->
-// setup dynamic routing ---->
-// Male a dynamic page ---->
-
-
-
-// Install ejs package cmd == npm i ejs 
-// set in App 
-// then use 
-
-// <% %> this is ejs barckets
-// <%= %> is a Js load
-// <% %> is a html load
+    app.listen(5000);
