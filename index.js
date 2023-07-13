@@ -11,8 +11,16 @@ async function getData() {
     // console.log(response);
 }
 
-getData().then((resp)=>{
-    resp.find().toArray().then((data)=>{
-        console.log(data)
-    })
-});
+// getData().then((resp)=>{
+//     resp.find().toArray().then((data)=>{
+//         console.log(data)
+//     })
+// });
+
+const main = async () =>{
+    let data = await getData();
+    data = await data.find().toArray();
+    console.log(data)
+}
+
+main();
