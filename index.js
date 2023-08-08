@@ -20,7 +20,26 @@ mongoose.connect(url)
 .then(()=>console.log("connecting successfully"))
 .catch((err)=>console.warn(err))
 
+const ProductsSchema = new mongoose.Schema({
+    name:{
+        type : String,
+        required : true
+    },
+    phone:{
+        type : Number,
+        required : true
+    },
+    fees:{
+        type : Boolean,
+        required : true
+    },
+    date :{
+        type: date,
+        default : Date.now
+    }
+})
 
+new mongoose.model('Products', ProductsSchema)
 
 
 
