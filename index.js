@@ -1,16 +1,31 @@
-const { MongoClient } = require('mongodb');
-const url = 'mongodb://127.0.0.1:27017';
-const database = 'e-comm';
-const client = new MongoClient(url);
+// const { MongoClient } = require('mongodb');
+// const url = 'mongodb://127.0.0.1:27017';
+// const database = 'e-comm';
+// const client = new MongoClient(url);
 
-async function getData() {
-    let result = await client.connect();
-    let db = result.db(database);
-    let collection = db.collection('Products');
-    let response = await collection.find({}).toArray();
-    console.log(response);
-}
+// async function getData() {
+//     let result = await client.connect();
+//     let db = result.db(database);
+//     let collection = db.collection('Products');
+//     let response = await collection.find({}).toArray();
+//     console.log(response);
+// }
 
-getData();
+// getData();
+
+
+const mongoose = require('mongoose');
+const url = 'mongodb://127.0.0.1:27017/e-comm';
+mongoose.connect(url)
+.then(()=>console.log("connecting successfully"))
+.catch((err)=>console.warn(err))
+
+
+
+
+
+
+
+
 
 // nodemon have start >>cmd :  npm run serve
