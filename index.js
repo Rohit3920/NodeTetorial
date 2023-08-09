@@ -42,14 +42,28 @@ const ProductsSchema = new mongoose.Schema({
 
 const Product = new mongoose.model("Products", ProductsSchema);
 
-const createProduct  = new Product({
-    name : "Rohit",
-    Phone : 8767100736,
-    fees : true
-});
+// const createProduct  = new Product({
+//     name : "Rohit",
+//     Phone : 8767100736,
+//     fees : true
+// });
 
+// createProduct.save();
 
-createProduct.save();
+const createProducts = async () =>{
+    try{
+        const newProduct = new Product({
+            name : 'samir',
+            Phone : 789084398,
+            fees : false
+        })
+        const productData = await newProduct.save();
+    }catch(error){
+console.log(error.message);
+    }
+}
+
+createProducts()
 
 
 
