@@ -18,14 +18,15 @@ const mongoose = require('mongoose');
 const url = 'mongodb://127.0.0.1:27017/e-comm';
 mongoose.connect(url)
 .then(()=>console.log("connecting successfully"))
-.catch((err)=>console.warn(err))
+.catch((err)=>console.warn(err));
+
 
 const ProductsSchema = new mongoose.Schema({
     name:{
         type : String,
         required : true
     },
-    phone:{
+    Phone:{
         type : Number,
         required : true
     },
@@ -33,13 +34,22 @@ const ProductsSchema = new mongoose.Schema({
         type : Boolean,
         required : true
     },
-    date :{
-        type: date,
+    Date :{
+        type: Date,
         default : Date.now
     }
 })
 
-new mongoose.model('Products', ProductsSchema)
+const Product = new mongoose.model("Products", ProductsSchema);
+
+const createProduct  = new Product({
+    name : "Rohit",
+    Phone : 8767100736,
+    fees : true
+});
+
+
+createProduct.save();
 
 
 
