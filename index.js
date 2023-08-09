@@ -42,28 +42,31 @@ const ProductsSchema = new mongoose.Schema({
 
 const Product = new mongoose.model("Products", ProductsSchema);
 
-// const createProduct  = new Product({
-//     name : "Rohit",
-//     Phone : 8767100736,
-//     fees : true
-// });
-
-// createProduct.save();
-
 const createProducts = async () =>{
     try{
-        const newProduct = new Product({
-            name : 'samir',
-            Phone : 789084398,
+        const newProduct1 = new Product({
+            name : 'pruthvi',
+            Phone : 15646416,
+            fees : true
+        });
+        const newProduct2 = new Product({
+            name : 'samarjeet',
+            Phone : 986448565,
             fees : false
+        });
+        const newProduct3 = new Product({
+            name : 'pratik',
+            Phone : 45148816,
+            fees : true
         })
-        const productData = await newProduct.save();
+        const productData = await Product.insertMany([newProduct1, newProduct2, newProduct3]);
+        console.log(productData)
     }catch(error){
 console.log(error.message);
     }
 }
 
-createProducts()
+createProducts();
 
 
 
