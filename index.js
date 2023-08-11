@@ -45,6 +45,8 @@ const Product = new mongoose.model("Products", ProductsSchema);
 
 const readDoc = async () => {
     try {
+
+    // Comparison Operator
         // const result = await Product.find({RollNo : {$eq : 5}})
         // const result = await Product.find({RollNo : {$gt : 5}})
         // const result = await Product.find({RollNo : {$gte : 5}})
@@ -52,7 +54,12 @@ const readDoc = async () => {
         // const result = await Product.find({RollNo : {$lte : 5}})
         // const result = await Product.find({RollNo : {$ne : 10}})
         // const result = await Product.find({RollNo : {$in : [4, 6]}})
-        const result = await Product.find({RollNo : {$nin :[4, 6]}})
+        // const result = await Product.find({RollNo : {$nin :[4, 6]}})
+
+// Logical Operator
+        // const result = await Product.find({$and : [{fees : false},{RollNo : 1}]})
+        // const result = await Product.find({$or : [{fees : false},{RollNo : 1}]})
+        const result = await Product.find({$nor : [{fees : true},{RollNo : 1}]})
 
         .select({_id: 0, name:1, Phone:1, RollNo:1})
         // .limit(1);
