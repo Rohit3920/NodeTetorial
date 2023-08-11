@@ -63,12 +63,17 @@ const readDoc = async () => {
         // const result = await Product.find({RollNo :{$not : {$gt : 5}}})
 
 
-        const result = await Product.find({RollNo : {$gte : 5}})
+        const result = await Product.find({})
         .select({_id: 0, name:1, Phone:1, RollNo:1})
+//sorting method : by default
+        // .sort();
 
-        // counting Documents 
-        .count()
-        // .limit(1);
+//sorting method : by Desending Order
+        .sort({RollNo : 1})
+
+//sorting method : by Asending Order
+        // .sort({RollNo : -1})
+
         console.log(result)
     } catch (error) {
         console.log(error.message)
