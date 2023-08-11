@@ -59,7 +59,10 @@ const readDoc = async () => {
 // Logical Operator
         // const result = await Product.find({$and : [{fees : false},{RollNo : 1}]})
         // const result = await Product.find({$or : [{fees : false},{RollNo : 1}]})
-        const result = await Product.find({$nor : [{fees : true},{RollNo : 1}]})
+        // const result = await Product.find({$nor : [{fees : true},{RollNo : 1}]})
+
+
+        const result = await Product.find({RollNo :{$not : {$gt : 5}}})
 
         .select({_id: 0, name:1, Phone:1, RollNo:1})
         // .limit(1);
