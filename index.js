@@ -45,9 +45,17 @@ const Product = new mongoose.model("Products", ProductsSchema);
 
 const readDoc = async () => {
     try {
-        const result = await Product.find({fees : false})
-        .select({_id: 0, name:1, Phone:1})
-        .limit(1);
+        // const result = await Product.find({RollNo : {$eq : 5}})
+        // const result = await Product.find({RollNo : {$gt : 5}})
+        // const result = await Product.find({RollNo : {$gte : 5}})
+        // const result = await Product.find({RollNo : {$lt : 5}})
+        // const result = await Product.find({RollNo : {$lte : 5}})
+        // const result = await Product.find({RollNo : {$ne : 10}})
+        // const result = await Product.find({RollNo : {$in : [4, 6]}})
+        const result = await Product.find({RollNo : {$nin :[4, 6]}})
+
+        .select({_id: 0, name:1, Phone:1, RollNo:1})
+        // .limit(1);
         console.log(result)
     } catch (error) {
         console.log(error.message)
@@ -55,38 +63,6 @@ const readDoc = async () => {
 }
 
 readDoc();
-
-// const createProducts = async () =>{
-//     try{
-//         const newProduct1 = new Product({
-//             name : 'pruthvi',
-//             Phone : 15646416,
-//             fees : true
-//         });
-//         const newProduct2 = new Product({
-//             name : 'samarjeet',
-//             Phone : 986448565,
-//             fees : false
-//         });
-//         const newProduct3 = new Product({
-//             name : 'pratik',
-//             Phone : 45148816,
-//             fees : true
-//         })
-
-//         const productData = await Product.insertMany([newProduct1, newProduct2, newProduct3]);
-//         console.log(productData)
-//     }catch(error){
-//         console.log(error.message);
-//     }
-// }
-
-// createProducts();
-
-
-
-
-
 
 
 // nodemon have start >>cmd :  npm run serve
