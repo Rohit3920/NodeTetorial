@@ -17,56 +17,69 @@
 const mongoose = require('mongoose');
 const url = 'mongodb://127.0.0.1:27017/e-comm';
 mongoose.connect(url)
-.then(()=>console.log("connecting successfully"))
-.catch((err)=>console.warn(err));
+    .then(() => console.log("connecting successfully"))
+    .catch((err) => console.warn(err));
 
 
 const ProductsSchema = new mongoose.Schema({
-    name:{
-        type : String,
-        required : true
+    name: {
+        type: String,
+        required: true
     },
-    Phone:{
-        type : Number,
-        required : true
+    Phone: {
+        type: Number,
+        required: true
     },
-    fees:{
-        type : Boolean,
-        required : true
+    fees: {
+        type: Boolean,
+        required: true
     },
-    Date :{
+    Date: {
         type: Date,
-        default : Date.now
+        default: Date.now
     }
 })
 
 const Product = new mongoose.model("Products", ProductsSchema);
 
-const createProducts = async () =>{
-    try{
-        const newProduct1 = new Product({
-            name : 'pruthvi',
-            Phone : 15646416,
-            fees : true
-        });
-        const newProduct2 = new Product({
-            name : 'samarjeet',
-            Phone : 986448565,
-            fees : false
-        });
-        const newProduct3 = new Product({
-            name : 'pratik',
-            Phone : 45148816,
-            fees : true
-        })
-        const productData = await Product.insertMany([newProduct1, newProduct2, newProduct3]);
-        console.log(productData)
-    }catch(error){
-console.log(error.message);
+
+const readDoc = async () => {
+    try {
+        const result = await Product.find();
+        console.log(result)
+    } catch (error) {
+        console.log(error.message)
     }
 }
 
-createProducts();
+readDoc();
+
+// const createProducts = async () =>{
+//     try{
+//         const newProduct1 = new Product({
+//             name : 'pruthvi',
+//             Phone : 15646416,
+//             fees : true
+//         });
+//         const newProduct2 = new Product({
+//             name : 'samarjeet',
+//             Phone : 986448565,
+//             fees : false
+//         });
+//         const newProduct3 = new Product({
+//             name : 'pratik',
+//             Phone : 45148816,
+//             fees : true
+//         })
+
+//         const productData = await Product.insertMany([newProduct1, newProduct2, newProduct3]);
+//         console.log(productData)
+//     }catch(error){
+//         console.log(error.message);
+//     }
+// }
+
+// createProducts();
 
 
 
