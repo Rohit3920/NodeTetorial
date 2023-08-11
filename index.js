@@ -45,7 +45,9 @@ const Product = new mongoose.model("Products", ProductsSchema);
 
 const readDoc = async () => {
     try {
-        const result = await Product.find();
+        const result = await Product.find({fees : false})
+        .select({_id: 0, name:1, Phone:1})
+        .limit(1);
         console.log(result)
     } catch (error) {
         console.log(error.message)
