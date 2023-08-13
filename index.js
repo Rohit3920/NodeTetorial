@@ -43,15 +43,15 @@ const ProductsSchema = new mongoose.Schema({
 const Product = new mongoose.model("Products", ProductsSchema);
 
 
-const deleteDoc = async (Phone) => {
+const deleteDoc = async (_id) => {
     try {
-        const delData = await Product.deleteMany({ Phone })
+        const delData = await Product.findByIdAndDelete({ _id })
         console.log(delData)
     } catch (error) {
         console.log(error.message)
     }
 }
-deleteDoc("8767100736")
+deleteDoc("64cf5d0637c8717026d0c31a")
 
 
 // nodemon have start >>cmd :  npm run serve
