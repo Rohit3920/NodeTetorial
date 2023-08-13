@@ -43,44 +43,20 @@ const ProductsSchema = new mongoose.Schema({
 const Product = new mongoose.model("Products", ProductsSchema);
 
 
-const readDoc = async () => {
+const updateDoc = async (_id) => {
     try {
 
-    // Comparison Operator
-        // const result = await Product.find({RollNo : {$eq : 5}})
-        // const result = await Product.find({RollNo : {$gt : 5}})
-        // const result = await Product.find({RollNo : {$gte : 5}})
-        // const result = await Product.find({RollNo : {$lt : 5}})
-        // const result = await Product.find({RollNo : {$lte : 5}})
-        // const result = await Product.find({RollNo : {$ne : 10}})
-        // const result = await Product.find({RollNo : {$in : [4, 6]}})
-        // const result = await Product.find({RollNo : {$nin :[4, 6]}})
-
-// Logical Operator
-        // const result = await Product.find({$and : [{fees : false},{RollNo : 1}]})
-        // const result = await Product.find({$or : [{fees : false},{RollNo : 1}]})
-        // const result = await Product.find({$nor : [{fees : true},{RollNo : 1}]})
-        // const result = await Product.find({RollNo :{$not : {$gt : 5}}})
-
-
-        const result = await Product.find({})
-        .select({_id: 0, name:1, Phone:1, RollNo:1})
-//sorting method : by default
-        // .sort();
-
-//sorting method : by Desending Order
-        .sort({RollNo : 1})
-
-//sorting method : by Asending Order
-        // .sort({RollNo : -1})
-
-        console.log(result)
+        const data = await Product.findByIdAndUpdate({ _id },
+            {
+                $set: { name: "Samir" }
+            },
+            { new: true })
+        console.log(data)
     } catch (error) {
         console.log(error.message)
     }
 }
 
-readDoc();
-
+updateDoc("64d387ebd53bd9cfd99f0425")
 
 // nodemon have start >>cmd :  npm run serve
