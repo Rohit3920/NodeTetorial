@@ -1,17 +1,13 @@
 const dbConnect = require("./mongodb")
 
-const insertData = async () => {
+const updateOneData = async () => {
     const doc = await dbConnect();
-    const result = await doc.insert({
-        name : "swapnil",
-        email : "swapnil@gmail.com",
-        fees : true
-    });
+    const result = await doc.updateOne({
+        name : "swapnil"}, {$set : {fees : false}});
     if(result.acknowledged){
-        console.log("Data inserted successfully")
+        console.log("Data Updated successfully")
     }else{
-        console.log("Not send")
+        console.log("Not updated")
     }
-
 }
-insertData();
+updateOneData();
