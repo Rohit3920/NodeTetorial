@@ -1,13 +1,13 @@
 const dbConnect = require("./mongodb")
 
-const updateManyData = async () => {
+const DeleteData = async () => {
     const doc = await dbConnect();
-    const result = await doc.updateMany({
-        name : "swapnil"}, {$set : {fees : false}});
+    const result = await doc.deleteOne({
+        name : "swapnil"});
     if(result.acknowledged){
-        console.log("Many Data Updated successfully")
+        console.log("One Data Deleted successfully")
     }else{
-        console.log("Not updated")
+        console.log("Not Deleted")
     }
 }
-updateManyData();
+DeleteData();
