@@ -1,13 +1,51 @@
-const dbConnect = require("./mongodb")
+const express = require('express');
+const dbconnect = require("./mongodb");
+const { magenta } = require('colors');
+const mongodb = require("mongodb");
 
-const DeleteData = async () => {
-    const doc = await dbConnect();
-    const result = await doc.deleteOne({
-        name : "swapnil"});
-    if(result.acknowledged){
-        console.log("One Data Deleted successfully")
-    }else{
-        console.log("Not Deleted")
-    }
-}
-DeleteData();
+const app = express();
+
+app.use(express.json())
+
+
+// ----------------------------------Get mathod for Node js--------------------------------------------
+app.get("/", async (req, resp) => {
+    const data = await dbconnect();
+    const result = await data.find().toArray();
+
+    resp.send(result)
+})
+
+// ----------------------------------Post mathod for Node js--------------------------------------------
+app.post("/", async (req, resp) => {
+    const data = await dbconnect();
+    const result = await data.insertOne(req.body)
+
+    resp.send(result)
+});
+
+
+// ----------------------------------Put mathod for Node js--------------------------------------------
+app.put("/:name", async (req, resp) => {
+    const data = await dbconnect();
+    const result = await data.updateOne(
+        { name: req.param.name },
+        {
+            $set: {
+                fees: false
+            }
+        }
+    )
+
+    resp.send({ result: "update" })
+})
+
+// ----------------------------------Delete mathod for Node js-------------------------------------------- 
+app.delete("/:id", async (req, resp) => {
+    // console.log(req.params.id + "Done")
+    const data = await dbconnect();
+    const result = await data.deleteOne({ _id: new mongodb.ObjectId(req.params.id) });
+    resp.send(result);
+})
+
+app.listen(5010);
