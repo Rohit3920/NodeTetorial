@@ -1,51 +1,44 @@
-const express = require('express');
-const dbconnect = require("./mongodb");
-const { magenta } = require('colors');
-const mongodb = require("mongodb");
+const mongoose = require('mongoose');
 
-const app = express();
+const mongooseWithDB = async () => {
+    await mongoose.connect("mongodb://127.0.0.1:27017/e-comm");
+    const ProductSchema = new mongoose.Schema({
+        name : String,
+        Phone : Number,
+        fees : Boolean,
+        RollNo : Number
+    });
+    const ProductModel = mongoose.model('products', ProductSchema)
 
-app.use(express.json())
+    //----------------------------------Create Record-----------------------------------------------
+    // let data = new ProductModel({
+    //     name : "guru",
+    //     Phone : 37972496,
+    //     fees : true,
+    //     RollNo : 13
+    // });
+
+    // let result = await data.save();
+    // console.log(result)
+
+    //----------------------------------Update Record-----------------------------------------------
+    let data = await ProductModel.updateOne({name : 'guru'},
+    {$set :{
+        fees : false,
+    }})
+    console.log(data);
 
 
-// ----------------------------------Get mathod for Node js--------------------------------------------
-app.get("/", async (req, resp) => {
-    const data = await dbconnect();
-    const result = await data.find().toArray();
+    //----------------------------------Delete Record-----------------------------------------------
+    // let data = await ProductModel.deleteMany({
+    //     price : 300,
+    // })
+    // console.log(data)
 
-    resp.send(result)
-})
+    //----------------------------------Read/Find Record-----------------------------------------------
+    // let data = await ProductModel.find({name : 'parth'});
+    // console.log(data)
 
-// ----------------------------------Post mathod for Node js--------------------------------------------
-app.post("/", async (req, resp) => {
-    const data = await dbconnect();
-    const result = await data.insertOne(req.body)
+}
 
-    resp.send(result)
-});
-
-
-// ----------------------------------Put mathod for Node js--------------------------------------------
-app.put("/:name", async (req, resp) => {
-    const data = await dbconnect();
-    const result = await data.updateOne(
-        { name: req.param.name },
-        {
-            $set: {
-                fees: false
-            }
-        }
-    )
-
-    resp.send({ result: "update" })
-})
-
-// ----------------------------------Delete mathod for Node js-------------------------------------------- 
-app.delete("/:id", async (req, resp) => {
-    // console.log(req.params.id + "Done")
-    const data = await dbconnect();
-    const result = await data.deleteOne({ _id: new mongodb.ObjectId(req.params.id) });
-    resp.send(result);
-})
-
-app.listen(5010);
+mongooseWithDB();
