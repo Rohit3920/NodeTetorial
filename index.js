@@ -1,44 +1,17 @@
-const mongoose = require('mongoose');
+const express = require("express");
 
-const mongooseWithDB = async () => {
-    await mongoose.connect("mongodb://127.0.0.1:27017/e-comm");
-    const ProductSchema = new mongoose.Schema({
-        name : String,
-        Phone : Number,
-        fees : Boolean,
-        RollNo : Number
-    });
-    const ProductModel = mongoose.model('products', ProductSchema)
-
-    //----------------------------------Create Record-----------------------------------------------
-    // let data = new ProductModel({
-    //     name : "guru",
-    //     Phone : 37972496,
-    //     fees : true,
-    //     RollNo : 13
-    // });
-
-    // let result = await data.save();
-    // console.log(result)
-
-    //----------------------------------Update Record-----------------------------------------------
-    let data = await ProductModel.updateOne({name : 'guru'},
-    {$set :{
-        fees : false,
-    }})
-    console.log(data);
+require ("./config");
+const product = require("./product");
 
 
-    //----------------------------------Delete Record-----------------------------------------------
-    // let data = await ProductModel.deleteMany({
-    //     price : 300,
-    // })
-    // console.log(data)
+const app = express();
+app.use(express.json());
 
-    //----------------------------------Read/Find Record-----------------------------------------------
-    // let data = await ProductModel.find({name : 'parth'});
-    // console.log(data)
+app.post("/create", async(req, resp) =>{
+    let data = new product(req.body);
+    let result = await data.save();
+    console.log(req.body);
+    resp.send(req.body);
+})
 
-}
-
-mongooseWithDB();
+app.listen(5000);
