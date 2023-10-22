@@ -1,28 +1,18 @@
-// install npm-multer package
-// create uploads folder in project directory
-// ser single or multiple file upload (line:20), and set file name (user_file);
-// open postmon and select post method and choose from-data > set Name (user_file) > select "file"> choose file And SEND; 
 
+const mysql = require("mysql")
 
-
-const express = require("express")
-const multer = require("multer")
-
-const app = express();
-
-const uploadFile =  multer({
-    storage : multer.diskStorage({
-        destination : (req, file, cd)=>{
-            cd(null, "uploads")
-        },
-        filename : (req, file,cd)=>{
-            cd(null, file.fieldname+"-"+Date.now()+'.jpg')
-        }
-    })
-}).single("user_file");
-
-app.post("/upload", uploadFile, (req, resp)=>{
-    resp.send("File upload....")
+const connMySQL = mysql.createConnection({                   //connect MySQL in localhost
+    host : "localhost",
+    user : 'root',
+    password : "",
+    database : 'e-comm'
 })
 
-app.listen(5400)
+connMySQL.connect((e)=>{                       // check MySQL database connect or not
+    var data = e? e:"connected"
+    console.log(data)
+})
+
+connMySQL.query("select * from products", (err, res)=>{
+    console.log(res)
+})
