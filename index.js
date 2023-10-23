@@ -1,18 +1,14 @@
+const express = require("express")
+const connMySQL = require("./configMySQL")
 
-const mysql = require("mysql")
+const app = express();
 
-const connMySQL = mysql.createConnection({                   //connect MySQL in localhost
-    host : "localhost",
-    user : 'root',
-    password : "",
-    database : 'e-comm'
+app.get("/", (req, resp) => {
+    connMySQL.query("select * from products", (err, result) => {
+       var data = err ? err : result
+        console.log(data)
+        resp.send(data)
+    })
 })
 
-connMySQL.connect((e)=>{                       // check MySQL database connect or not
-    var data = e? e:"connected"
-    console.log(data)
-})
-
-connMySQL.query("select * from products", (err, res)=>{
-    console.log(res)
-})
+app.listen(5400);
