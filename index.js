@@ -13,10 +13,15 @@ app.get("/", (req, resp) => {
 })
 
 app.post("/upload", (req, resp) => {
-    const insert = {
-        name: "Rohan",
-        country: "INDAIN",
-    }
+    //...............................Static Data.................................
+    // const insert = {
+    //     name: "Rohan",
+    //     country: "INDAIN",
+    // }
+
+    //...............................Pass Data using POSTMAN.................................
+    const insert = req.body;
+
 
     connMySQL.query("INSERT INTO products SET ?", insert, (err, resl, feilds) => {
         if (err) throw err
