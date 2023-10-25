@@ -28,4 +28,22 @@ app.post("/upload", (req, resp) => {
         resp.send(resl);
     })
 });
+
+app.put("/update", (req, resp) => {
+    //...........................Static date send............................
+    // const updateData = ["Rohit", "Bharat", 12]
+
+    //....................................Postmon through...................
+    const updateData = [
+        req.body.name,
+        req.body.country,
+        req.body.id
+
+    ]
+
+    connMySQL.query("UPDATE users SET name =?, country = ? where id = ?", updateData, (err, resl, feilds) => {
+        const result = err ? "error" : resl;
+        resp.send(result);
+    })
+})
 app.listen(5400);
